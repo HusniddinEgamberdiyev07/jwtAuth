@@ -11,9 +11,7 @@ module.exports = (req, res, next)=>{
             if(err.name === "TokenExpiredError") res.status(401).send("Expired token")
             else res.status(401).json("Invalid token")
         }
-        console.log(decoded);
-        
-        req.user = decoded;
+        req.user = {id:decoded.id, email:decoded.email};
         next();
     })
 }
