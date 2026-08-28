@@ -8,8 +8,8 @@ module.exports = (req, res, next)=>{
     
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded)=>{
         if(err) {
-            if(err.message === "TokenExpiredError") res.status(401).send("Expired token");
-            res.status(401).json("Invalid token")
+            if(err.name === "TokenExpiredError") res.status(401).send("Expired token")
+            else res.status(401).json("Invalid token")
         }
         console.log(decoded);
         
